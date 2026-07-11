@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Historical Trekking Data</h2>
+<ul class="list-group">
+  {% for booking in bookings %}
+    <li class="list-group-item">{{ booking.user.username }} booked {{ booking.trek.name }} on {{ booking.booked_at.strftime('%Y-%m-%d') }} ({{ booking.status }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

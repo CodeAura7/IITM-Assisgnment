@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Available Treks</h2>
+<form method="get" class="mb-3">
+  <div class="row g-2">
+    <div class="col-md-4"><input class="form-control" name="query" placeholder="Search by name or location" value="{{ query }}"></div>
+    <div class="col-md-3"><input class="form-control" name="location" placeholder="Location" value="{{ location }}"></div>
+    <div class="col-md-3"><select class="form-select" name="difficulty"><option value="">All Difficulties</option><option value="Easy" {% if difficulty=='Easy' %}selected{% endif %}>Easy</option><option value="Moderate" {% if difficulty=='Moderate' %}selected{% endif %}>Moderate</option><option value="Hard" {% if difficulty=='Hard' %}selected{% endif %}>Hard</option></select></div>
+    <div class="col-md-2"><button class="btn btn-primary">Filter</button></div>
+  </div>
+</form>
+<ul class="list-group">
+  {% for trek in treks %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{ trek.name }} - {{ trek.location }} (₹{{ trek.price }}) - {{ trek.difficulty }}</span>
+      <form method="post" action="{{ url_for('user.book_trek') }}">
+        <input type="hidden" name="trek_id" value="{{ trek.id }}">
+        <button class="btn btn-sm btn-primary">Book</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

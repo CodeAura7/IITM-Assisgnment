@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Profile</h2>
+<div class="card p-3">
+  <form method="post">
+    <div class="mb-3"><label class="form-label">Username</label><input class="form-control" name="username" value="{{ current_user.username }}"></div>
+    <div class="mb-3"><label class="form-label">Phone</label><input class="form-control" name="phone" value="{{ current_user.phone or '' }}"></div>
+    <div class="mb-3"><label class="form-label">Address</label><input class="form-control" name="address" value="{{ current_user.address or '' }}"></div>
+    <button class="btn btn-success">Update Profile</button>
+  </form>
+</div>
+{% endblock %}

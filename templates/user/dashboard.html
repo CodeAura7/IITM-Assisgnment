@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome, {{ current_user.username }}</h2>
+<p><a href="{{ url_for('user.treks') }}" class="btn btn-outline-primary">Browse Treks</a></p>
+<div class="row g-4">
+  {% for trek in treks %}
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h5>{{ trek.name }}</h5>
+      <p>{{ trek.description }}</p>
+      <p><strong>Location:</strong> {{ trek.location }}</p>
+      <p><strong>Duration:</strong> {{ trek.duration_days }} days</p>
+      <p><strong>Difficulty:</strong> {{ trek.difficulty }}</p>
+      <p><strong>Price:</strong> ₹{{ trek.price }}</p>
+      <p><strong>Slots left:</strong> {{ trek.available_slots }}</p>
+      <form method="post" action="{{ url_for('user.book_trek') }}">
+        <input type="hidden" name="trek_id" value="{{ trek.id }}">
+        <button class="btn btn-primary">Book Now</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

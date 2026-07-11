@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Staff Dashboard</h2>
+{% if assigned_trek %}
+  <div class="alert alert-info">Assigned trek: {{ assigned_trek.name }}</div>
+  <a href="{{ url_for('staff.trek_detail', trek_id=assigned_trek.id) }}" class="btn btn-outline-primary mb-3">Manage Assigned Trek</a>
+  <ul class="list-group">
+    {% for booking in bookings %}
+      <li class="list-group-item">{{ booking.user.username }} booked {{ booking.trek.name }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No trek assigned yet.</p>
+{% endif %}
+{% endblock %}

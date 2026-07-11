@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Manage Treks</h2>
+<form method="get" class="mb-3">
+  <input class="form-control" name="query" placeholder="Search by trek name or ID" value="{{ query }}">
+</form>
+<form method="post" class="mb-4">
+  <div class="row g-3">
+    <div class="col-md-4"><input class="form-control" name="name" placeholder="Name" required></div>
+    <div class="col-md-4"><input class="form-control" name="location" placeholder="Location" required></div>
+    <div class="col-md-4"><input class="form-control" name="duration_days" type="number" placeholder="Duration days" required></div>
+    <div class="col-md-4"><input class="form-control" name="price" type="number" step="0.01" placeholder="Price" required></div>
+    <div class="col-md-4"><input class="form-control" name="capacity" type="number" placeholder="Capacity" required></div>
+    <div class="col-md-4"><input class="form-control" name="difficulty" placeholder="Difficulty" value="Moderate"></div>
+    <div class="col-md-4"><select class="form-select" name="status"><option value="Open">Open</option><option value="Closed">Closed</option></select></div>
+    <div class="col-md-12"><textarea class="form-control" name="description" placeholder="Description" required></textarea></div>
+  </div>
+  <button class="btn btn-success mt-3">Create Trek</button>
+</form>
+
+<ul class="list-group">
+  {% for trek in treks %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span><strong>{{ trek.name }}</strong> - {{ trek.location }} ({{ trek.duration_days }} days, ₹{{ trek.price }}) <span class="badge bg-info text-dark">{{ trek.available_slots }} slots left</span></span>
+      <span>
+        <a href="{{ url_for('admin.edit_trek', trek_id=trek.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+        <form method="post" action="{{ url_for('admin.delete_trek', trek_id=trek.id) }}" style="display:inline">
+          <button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </span>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

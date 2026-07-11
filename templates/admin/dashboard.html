@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="row g-4">
+  <div class="col-md-3"><div class="card p-3"><h5>Treks</h5><p>{{ treks|length }}</p><a href="{{ url_for('admin.manage_treks') }}" class="btn btn-primary">Manage Treks</a></div></div>
+  <div class="col-md-3"><div class="card p-3"><h5>Users</h5><p>{{ users|length }}</p><a href="{{ url_for('admin.manage_users') }}" class="btn btn-primary">Manage Users</a></div></div>
+  <div class="col-md-3"><div class="card p-3"><h5>Staff</h5><p>{{ staff_members|length }}</p><a href="{{ url_for('admin.manage_staff') }}" class="btn btn-primary">Manage Staff</a></div></div>
+  <div class="col-md-3"><div class="card p-3"><h5>Bookings</h5><p>{{ bookings|length }}</p><a href="{{ url_for('admin.bookings') }}" class="btn btn-primary">View Bookings</a></div></div>
+</div>
+{% endblock %}

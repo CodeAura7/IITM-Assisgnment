@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Trek</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Name</label><input class="form-control" name="name" value="{{ trek.name }}" required></div>
+  <div class="mb-3"><label class="form-label">Location</label><input class="form-control" name="location" value="{{ trek.location }}" required></div>
+  <div class="mb-3"><label class="form-label">Description</label><textarea class="form-control" name="description" required>{{ trek.description }}</textarea></div>
+  <div class="mb-3"><label class="form-label">Duration Days</label><input class="form-control" type="number" name="duration_days" value="{{ trek.duration_days }}" required></div>
+  <div class="mb-3"><label class="form-label">Price</label><input class="form-control" type="number" step="0.01" name="price" value="{{ trek.price }}" required></div>
+  <div class="mb-3"><label class="form-label">Capacity</label><input class="form-control" type="number" name="capacity" value="{{ trek.capacity }}" required></div>
+  <div class="mb-3"><label class="form-label">Difficulty</label><input class="form-control" name="difficulty" value="{{ trek.difficulty }}"></div>
+  <div class="mb-3"><label class="form-label">Status</label><select class="form-select" name="status"><option value="Open" {% if trek.status=='Open' %}selected{% endif %}>Open</option><option value="Closed" {% if trek.status=='Closed' %}selected{% endif %}>Closed</option></select></div>
+  <button class="btn btn-success">Save</button>
+  <a href="{{ url_for('admin.manage_treks') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
